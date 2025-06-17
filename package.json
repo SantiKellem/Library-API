@@ -1,0 +1,26 @@
+{
+  "name": "api-notas-practica",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "ts-node-dev --respawn --loader ts-node/esm src/app.ts",
+    "build": "tsc",
+    "start": "node dist/app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@types/express": "^5.0.3",
+    "@types/node": "24.0.3",
+    "nodemon": "3.1.10",
+    "ts-node-dev": "2.0.0",
+    "typescript": "5.8.3"
+  },
+  "dependencies": {
+    "express": "5.1.0"
+  }
+}
