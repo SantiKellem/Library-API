@@ -1,0 +1,29 @@
+###
+GET http://localhost:3000/books
+
+###
+GET http://localhost:3000/books/11
+
+###
+POST http://localhost:3000/books
+Content-Type: application/json
+
+{
+  "isbn": "9785555551106",
+  "title": "Las 48 Leyes del Poder",
+  "editionNumber": "1st",
+  "editionDate": "2015-12-10T00:00:00Z",
+  "maxLoanDays": 25
+}
+
+###
+PATCH http://localhost:3000/books/1
+Content-Type: application/json
+
+{   
+    "title": "Cien Años de Soledad",
+    "editionDate": "2010-06-18T23:59:59Z"
+}
+
+###
+DELETE http://localhost:3000/books/7

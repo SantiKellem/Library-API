@@ -1,4 +1,4 @@
-import { Book } from '../interfaces/books';
+import { Book } from '../interfaces/books.js';
 import { BookSchemaType, BookPartialSchemaType } from '../utils/validateBook.js';
 import { getNewId } from '../utils/getNewId.js'
 import { createRequire } from "node:module";
@@ -27,7 +27,7 @@ export class BooksModel {
         return newBook;
     }
 
-    static updateBook(data: BookPartialSchemaType, id: number) {
+    static updateBook(data: BookPartialSchemaType, id: number): Book | undefined {
         const bookIndex = Books.findIndex(b => b.bookId == id);
 
         if (bookIndex != -1) {
@@ -46,8 +46,9 @@ export class BooksModel {
         const bookIndex = Books.findIndex(b => b.bookId == id);
         
         if (bookIndex != -1) {
+            const oldBook = Books[bookIndex];
             Books.splice(bookIndex, 1);
-            return Books[bookIndex];
+            return oldBook;
         }
         
         return undefined;
