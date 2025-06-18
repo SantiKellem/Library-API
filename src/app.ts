@@ -1,5 +1,5 @@
 import express from 'express';
-import LibrosRouter from './routes/NotasRoute.js';
+import { BooksRouter } from './routes/BooksRoute.js';
 
 const app = express();
 
@@ -7,7 +7,7 @@ const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 
-app.use("/libros", LibrosRouter());
+app.use("/books", BooksRouter);
 
 app.use((req, res) => {
     res.status(404).send('Not Found');
