@@ -1,6 +1,7 @@
 import express from 'express';
 import { BooksRouter } from './routes/BooksRoute.js';
 import { CopiesRouter } from './routes/CopiesRoute.js';
+import { SanctionPoliciesRouter } from './routes/SanctionPoliciesRoute.js';
 
 const app = express();
 
@@ -10,6 +11,7 @@ app.use(express.json());
 
 app.use("/books", BooksRouter);
 app.use("/copies", CopiesRouter);
+app.use("/sanctionPolicies", SanctionPoliciesRouter);
 
 app.use((req, res) => {
     res.status(404).send('Not Found');

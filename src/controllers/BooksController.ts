@@ -23,7 +23,7 @@ export class BooksController {
             return res.status(400).json({ error: JSON.parse(BookData.error.message) });
         
         const newBook = BooksModel.createBook(BookData.data);
-        return res.status(201).json(newBook)
+        return res.status(201).json(newBook);
     }
 
     static updateBook(req: Request, res: Response) {
@@ -44,6 +44,6 @@ export class BooksController {
         const id = req.params.id;
         const oldBook = BooksModel.deleteBook(+id);
         if (oldBook == undefined) res.status(404).json({ error: "Book not found" });
-        res.json(oldBook)
+        res.json(oldBook);
     }
 }

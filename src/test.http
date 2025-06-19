@@ -1,8 +1,9 @@
+### BOOK
 ###
-GET http://localhost:3000/copies
+GET http://localhost:3000/books
 
 ###
-GET http://localhost:3000/copies/7
+GET http://localhost:3000/books/7
 
 ###
 POST http://localhost:3000/books
@@ -15,6 +16,27 @@ Content-Type: application/json
   "editionDate": "2015-12-10T00:00:00Z",
   "maxLoanDays": 25
 }
+
+###
+PATCH http://localhost:3000/books
+Content-Type: application/json
+
+{
+  "copyId": 16,
+  "bookId": 11
+}
+
+###
+DELETE http://localhost:3000/books/7
+
+
+
+### COPY
+###
+GET http://localhost:3000/copies
+
+###
+GET http://localhost:3000/copies/7
 
 ###
 POST http://localhost:3000/copies
@@ -35,3 +57,33 @@ Content-Type: application/json
 
 ###
 DELETE http://localhost:3000/copies/7
+
+
+### SANCTION POLICY
+###
+GET http://localhost:3000/sanctionPolicies
+
+###
+GET http://localhost:3000/sanctionPolicies/2
+
+###
+POST http://localhost:3000/sanctionPolicies
+Content-Type: application/json
+
+{
+  "daysLateFrom": 61,
+  "daysLateTo": 120,
+  "sanctionDays": 90
+}
+
+###
+PATCH http://localhost:3000/sanctionPolicies/5
+Content-Type: application/json
+
+{
+  "daysLateTo": 60,
+  "sanctionDays": 151510510
+}
+
+###
+DELETE http://localhost:3000/sanctionPolicies/6

@@ -1,0 +1,32 @@
+[
+  {
+    "idSanctionPolicy": 1,
+    "daysLateFrom": 1,
+    "daysLateTo": 3,
+    "sanctionDays": 2
+  },
+  {
+    "idSanctionPolicy": 2,
+    "daysLateFrom": 4,
+    "daysLateTo": 7,
+    "sanctionDays": 5
+  },
+  {
+    "idSanctionPolicy": 3,
+    "daysLateFrom": 8,
+    "daysLateTo": 14,
+    "sanctionDays": 10
+  },
+  {
+    "idSanctionPolicy": 4,
+    "daysLateFrom": 15,
+    "daysLateTo": 30,
+    "sanctionDays": 20
+  },
+  {
+    "idSanctionPolicy": 5,
+    "daysLateFrom": 31,
+    "daysLateTo": 999,
+    "sanctionDays": 30
+  }
+]
