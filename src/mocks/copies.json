@@ -1,0 +1,167 @@
+[
+    {
+        "copyId": 1,
+        "book": {        
+            "bookId": 2,
+            "isbn": "9789500720020",
+            "title": "Rayuela",
+            "editionNumber": "2nd",
+            "editionDate": "2001-11-03T00:00:00Z",
+            "maxLoanDays": 10
+        }
+    },
+    {
+        "copyId": 2,
+        "book": {
+            "bookId": 1,
+            "isbn": "9789870435662",
+            "title": "Cien años de soledad",
+            "editionNumber": "3rd",
+            "editionDate": "2007-05-12T00:00:00Z",
+            "maxLoanDays": 15
+        }
+    },
+    {
+        "copyId": 3,
+        "book": {
+            "bookId": 5,
+            "isbn": "9788437604947",
+            "title": "La casa de Bernarda Alba",
+            "editionNumber": "4th",
+            "editionDate": "2005-07-14T00:00:00Z",
+            "maxLoanDays": 5
+        }
+    },
+    {
+        "copyId": 4,
+        "book": {
+            "bookId": 3,
+            "isbn": "9788420674170",
+            "title": "Don Quijote de la Mancha",
+            "editionNumber": "6th",
+            "editionDate": "1998-09-18T00:00:00Z",
+            "maxLoanDays": 20
+        }
+    },
+    {
+        "copyId": 5,
+        "book": {
+            "bookId": 6,
+            "isbn": "9789505817039",
+            "title": "Fervor de Buenos Aires",
+            "editionNumber": "2nd",
+            "editionDate": "1999-01-21T00:00:00Z",
+            "maxLoanDays": 12
+        }
+    },
+    {
+        "copyId": 6,
+        "book": {
+            "bookId": 4,
+            "isbn": "9789875666276",
+            "title": "El túnel",
+            "editionNumber": "1st",
+            "editionDate": "2010-03-25T00:00:00Z",
+            "maxLoanDays": 7
+        }
+    },
+    {
+        "copyId": 7,
+        "book": {
+            "bookId": 7,
+            "isbn": "9788497592208",
+            "title": "1984",
+            "editionNumber": "3rd",
+            "editionDate": "2002-06-10T00:00:00Z",
+            "maxLoanDays": 15
+        }
+    },
+    {
+        "copyId": 8,
+        "book": {
+            "bookId": 10,
+            "isbn": "9789870431106",
+            "title": "Martín Fierro",
+            "editionNumber": "7th",
+            "editionDate": "1995-02-17T00:00:00Z",
+            "maxLoanDays": 18
+        }
+    },
+    {
+        "copyId": 9,
+        "book": {
+            "bookId": 8,
+            "isbn": "9789877385472",
+            "title": "Los siete locos",
+            "editionNumber": "1st",
+            "editionDate": "2015-10-30T00:00:00Z",
+            "maxLoanDays": 8
+        }
+    },
+    {
+        "copyId": 10,
+        "book": {
+            "bookId": 9,
+            "isbn": "9789500730098",
+            "title": "El Aleph",
+            "editionNumber": "5th",
+            "editionDate": "2000-08-05T00:00:00Z",
+            "maxLoanDays": 10
+        }
+    },
+    {
+        "copyId": 11,
+        "book": {
+            "bookId": 10,
+            "isbn": "9789870431106",
+            "title": "Martín Fierro",
+            "editionNumber": "7th",
+            "editionDate": "1995-02-17T00:00:00Z",
+            "maxLoanDays": 18
+        }
+    },
+    {
+        "copyId": 12,
+        "book": {
+            "bookId": 2,
+            "isbn": "9789500720020",
+            "title": "Rayuela",
+            "editionNumber": "2nd",
+            "editionDate": "2001-11-03T00:00:00Z",
+            "maxLoanDays": 10
+        }
+    },
+    {
+        "copyId": 13,
+        "bookId": {
+            "bookId": 5,
+            "isbn": "9788437604947",
+            "title": "La casa de Bernarda Alba",
+            "editionNumber": "4th",
+            "editionDate": "2005-07-14T00:00:00Z",
+            "maxLoanDays": 5
+        }
+    },
+    {
+        "copyId": 14,
+        "bookId": {
+            "bookId": 3,
+            "isbn": "9788420674170",
+            "title": "Don Quijote de la Mancha",
+            "editionNumber": "6th",
+            "editionDate": "1998-09-18T00:00:00Z",
+            "maxLoanDays": 20
+        }
+    },
+    {
+        "copyId": 15,
+        "bookId": {
+            "bookId": 7,
+            "isbn": "9788497592208",
+            "title": "1984",
+            "editionNumber": "3rd",
+            "editionDate": "2002-06-10T00:00:00Z",
+            "maxLoanDays": 15
+        }
+    }
+]

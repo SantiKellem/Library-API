@@ -18,7 +18,7 @@ export class BooksModel {
     }
 
     static createBook(data: BookSchemaType): Book {
-        const bookId = getNewId();
+        const bookId = getNewId(Books, "bookId");
         const newBook: Book = {
             bookId,
             ...data
@@ -30,7 +30,7 @@ export class BooksModel {
     static updateBook(data: BookPartialSchemaType, id: number): Book | undefined {
         const bookIndex = Books.findIndex(b => b.bookId == id);
 
-        if (bookIndex != -1) {
+        if (bookIndex !== -1) {
             const book: Book = {
                 ...Books[bookIndex],
                 ...data
@@ -45,7 +45,7 @@ export class BooksModel {
     static deleteBook(id: number): Book | undefined {
         const bookIndex = Books.findIndex(b => b.bookId == id);
         
-        if (bookIndex != -1) {
+        if (bookIndex !== -1) {
             const oldBook = Books[bookIndex];
             Books.splice(bookIndex, 1);
             return oldBook;

@@ -10,7 +10,7 @@ const BookSchema = z.object({
 
 export type BookSchemaType = z.infer<typeof BookSchema>;
 
-export function ValidateBook (data: BookSchemaType) {
+export function ValidateBook(data: BookSchemaType) {
     return BookSchema.safeParse(data)
 }
 

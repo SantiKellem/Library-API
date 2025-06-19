@@ -1,8 +1,8 @@
 ###
-GET http://localhost:3000/books
+GET http://localhost:3000/copies
 
 ###
-GET http://localhost:3000/books/11
+GET http://localhost:3000/copies/7
 
 ###
 POST http://localhost:3000/books
@@ -10,20 +10,28 @@ Content-Type: application/json
 
 {
   "isbn": "9785555551106",
-  "title": "Las 48 Leyes del Poder",
+  "title": "La Nueva Mente del Emperador",
   "editionNumber": "1st",
   "editionDate": "2015-12-10T00:00:00Z",
   "maxLoanDays": 25
 }
 
 ###
-PATCH http://localhost:3000/books/1
+POST http://localhost:3000/copies
 Content-Type: application/json
 
-{   
-    "title": "Cien Años de Soledad",
-    "editionDate": "2010-06-18T23:59:59Z"
+{
+  "bookId": 11
 }
 
 ###
-DELETE http://localhost:3000/books/7
+PATCH http://localhost:3000/copies
+Content-Type: application/json
+
+{
+  "copyId": 16,
+  "bookId": 11
+}
+
+###
+DELETE http://localhost:3000/copies/7
