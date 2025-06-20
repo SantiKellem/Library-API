@@ -59,6 +59,7 @@ Content-Type: application/json
 DELETE http://localhost:3000/copies/7
 
 
+
 ### SANCTION POLICY
 ###
 GET http://localhost:3000/sanctionPolicies
@@ -87,3 +88,17 @@ Content-Type: application/json
 
 ###
 DELETE http://localhost:3000/sanctionPolicies/6
+
+
+
+### LOAN POLICY
+###
+GET http://localhost:3000/loanPolicy
+
+###
+POST http://localhost:3000/loanPolicy
+Content-Type: application/json
+
+{
+  "maxPendingBooks": 5
+}
