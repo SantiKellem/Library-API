@@ -18,12 +18,12 @@ Content-Type: application/json
 }
 
 ###
-PATCH http://localhost:3000/books
+PATCH http://localhost:3000/books/1
 Content-Type: application/json
 
 {
-  "copyId": 16,
-  "bookId": 11
+  "title": "Cien Años de Soledad",
+  "editionDate": "2015-12-10T00:00:00Z"
 }
 
 ###
@@ -43,7 +43,7 @@ POST http://localhost:3000/copies
 Content-Type: application/json
 
 {
-  "bookId": 11
+  "bookId": 10
 }
 
 ###
@@ -52,7 +52,7 @@ Content-Type: application/json
 
 {
   "copyId": 16,
-  "bookId": 11
+  "bookId": 9
 }
 
 ###
@@ -100,5 +100,5 @@ POST http://localhost:3000/loanPolicy
 Content-Type: application/json
 
 {
-  "maxPendingBooks": 5
+  "maxPendingBooks": 7
 }

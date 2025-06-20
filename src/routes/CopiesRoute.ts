@@ -7,11 +7,11 @@ CopiesRouter.get("/", CopiesController.getCopies);
 
 CopiesRouter.post("/", (req, res) => { CopiesController.createCopy(req, res) });
 
-CopiesRouter.get("/:id", CopiesController.getCopyById);
+CopiesRouter.get("/:id", (req, res) => { CopiesController.getCopyById(req, res) });
 
 CopiesRouter.patch("/", (req, res) => { CopiesController.updateCopy(req, res) });
 
-CopiesRouter.delete("/:id", CopiesController.deleteCopy);
+CopiesRouter.delete("/:id", (req, res) => { CopiesController.deleteCopy(req, res) });
 
 
 export { CopiesRouter };

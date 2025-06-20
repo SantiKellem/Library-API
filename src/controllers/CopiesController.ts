@@ -11,18 +11,26 @@ export class CopiesController {
 
     static getCopyById(req: Request, res: Response) {
         const id = req.params.id;
+
+        if (isNaN(+id)) {
+            return res.status(400).json({ error: "ID sent must be a number" });
+        }
+
         const copy = CopiesModel.getCopyById(+id)
-
         if (copy == undefined) 
-            res.status(404).json({ error: "Copy not found" });
+            return res.status(404).json({ error: "Copy not found" });
 
-        res.json(copy);
+        return res.json(copy);
     }
 
     static createCopy(req: Request, res: Response) {
         const { bookId } = req.body;
-        const book = BooksModel.getBookById(+bookId);
+    
+        if (isNaN(+bookId)) {
+            return res.status(400).json({ error: "ID sent must be a number" });
+        }
 
+        const book = BooksModel.getBookById(+bookId);
         if (book == undefined) 
             return res.status(404).json({ error: "Book not found" });
 
@@ -37,8 +45,11 @@ export class CopiesController {
         if (book == undefined) 
             return res.status(404).json({ error: "Book not found" });
 
-        const updatedCopy = CopiesModel.updateCopy(book, +copyId);
+        if (isNaN(+copyId)) {
+            return res.status(400).json({ error: "ID sent must be a number" });
+        }
 
+        const updatedCopy = CopiesModel.updateCopy(book, +copyId);
         if (updatedCopy == undefined)
             return res.status(404).json({ error: "Copy not found" });
 
@@ -47,11 +58,15 @@ export class CopiesController {
 
     static deleteCopy(req: Request, res: Response) {
         const id = req.params.id;
-        const oldCopy = CopiesModel.deleteCopy(+id);
 
+        if (isNaN(+id)) {
+            return res.status(400).json({ error: "ID sent must be a number" });
+        }
+
+        const oldCopy = CopiesModel.deleteCopy(+id);
         if (oldCopy == undefined)
-            res.status(404).json({ error: "Copy not found" });
+            return res.status(404).json({ error: "Copy not found" });
         
-        res.json(oldCopy);
+        return res.json(oldCopy);
     }
 }

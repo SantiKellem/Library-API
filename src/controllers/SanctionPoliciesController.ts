@@ -11,15 +11,15 @@ export class SanctionPoliciesController {
 
     static getById(req: Request, res: Response) {
         const id = req.params.id;
-
-        if (!isNaN(+id)) {
-            const policy = SanctionPoliciesModel.getById(+id);
-            if (policy == undefined)
-                return res.status(404).json({ error: "Sanction Policy not found" });
-            return res.json(policy);
-        }
         
-        return res.status(400).json({ error: "ID sent must be a number" });
+        if (isNaN(+id)) {
+            return res.status(400).json({ error: "ID sent must be a number" });
+        }
+
+        const policy = SanctionPoliciesModel.getById(+id);
+        if (policy == undefined)
+            return res.status(404).json({ error: "Sanction Policy not found" });
+        return res.json(policy);
     }
 
     static create(req: Request, res: Response) {
@@ -41,27 +41,27 @@ export class SanctionPoliciesController {
             return res.status(400).json({ error: JSON.parse(SanctionPolicyData.error.message) });
         }
 
-        if (!isNaN(+id)) {
-            const policy = SanctionPoliciesModel.update(SanctionPolicyData.data, +id);
-            if (policy == undefined)
-                return res.status(404).json({ error: "Sanction Policy not found" });
-            else 
-                return res.status(201).json(policy);
+        if (isNaN(+id)) {
+            return res.status(400).json({ error: "ID sent must be a number" });
         }
 
-        return res.status(400).json({ error: "ID sent must be a number" });
+        const policy = SanctionPoliciesModel.update(SanctionPolicyData.data, +id);
+        if (policy == undefined)
+            return res.status(404).json({ error: "Sanction Policy not found" });
+        else 
+            return res.status(201).json(policy);
     }
 
     static delete(req: Request, res: Response) {
         const id = req.params.id;
-        
-        if (!isNaN(+id)) {
-            const policy = SanctionPoliciesModel.delete(+id);
-            if (policy == undefined)
-                return res.status(404).json({ error: "Sanction Policy not found" });
-            return res.json(policy);
+
+        if (isNaN(+id)) {
+            return res.status(400).json({ error: "ID sent must be a number" });
         }
 
-        return res.status(400).json({ error: "ID sent must be a number" });
+        const oldPolicy = SanctionPoliciesModel.delete(+id);
+        if (oldPolicy == undefined)
+            return res.status(404).json({ error: "Sanction Policy not found" });
+        return res.json(oldPolicy);
     }
 }

@@ -11,9 +11,15 @@ export class BooksController {
 
     static getBookById(req: Request, res: Response) {
         const id = req.params.id;
+
+        if (isNaN(+id)) {
+            return res.status(400).json({ error: "ID sent must be a number" });
+        }
+        
         const book = BooksModel.getBookById(+id);
-        if (book == undefined) res.status(404).json({ error: "Book not found" });
-        res.json(book);
+        if (book == undefined)
+            return res.status(404).json({ error: "Book not found" });
+        return res.json(book);
     }
 
     static createBook(req: Request, res: Response) {
@@ -33,6 +39,10 @@ export class BooksController {
         if (!BookData.success) 
             return res.status(400).json({ error: JSON.parse(BookData.error.message) });
 
+        if (isNaN(+id)) {
+            return res.status(400).json({ error: "ID sent must be a number" });
+        }
+
         const updatedBook = BooksModel.updateBook(BookData.data, +id);
         if (updatedBook == undefined) 
             return res.status(404).json({ error: "Book not found" }); 
@@ -42,8 +52,14 @@ export class BooksController {
 
     static deleteBook(req: Request, res: Response) {
         const id = req.params.id;
-        const oldBook = BooksModel.deleteBook(+id);
-        if (oldBook == undefined) res.status(404).json({ error: "Book not found" });
-        res.json(oldBook);
+
+        if (isNaN(+id)) {
+            return res.status(400).json({ error: "ID sent must be a number" });
+        }
+        
+        const oldBook = BooksModel.getBookById(+id);
+        if (oldBook == undefined)
+            return res.status(404).json({ error: "Book not found" });
+        return res.json(oldBook);
     }
 }
