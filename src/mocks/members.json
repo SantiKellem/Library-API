@@ -1,0 +1,116 @@
+[
+  {
+    "memberId": 1,
+    "firstName": "Lucas",
+    "lastName": "Martinez",
+    "email": "lucas.martinez@example.com",
+    "address": "123 Main St, Rosario",
+    "phone": "+54 341 1234567",
+    "memberStatus": "Enabled",
+    "sanctions": []
+  },
+  {
+    "memberId": 2,
+    "firstName": "Camila",
+    "lastName": "Gomez",
+    "email": "camila.gomez@example.com",
+    "address": "456 Belgrano Ave, Rosario",
+    "phone": "+54 341 2345678",
+    "memberStatus": "Sanctioned",
+    "sanctions": [
+      {
+        "idSanction": 1,
+        "sanctionDate": "2025-05-22T00:00:00Z",
+        "sanctionDays": 2
+      },
+      {
+        "idSanction": 6,
+        "sanctionDate": "2025-06-10T00:00:00Z",
+        "sanctionDays": 30
+      }
+    ]
+  },
+  {
+    "memberId": 3,
+    "firstName": "Julián",
+    "lastName": "Fernández",
+    "email": "julian.fernandez@example.com",
+    "address": "789 Córdoba St, Rosario",
+    "phone": "+54 341 3456789",
+    "memberStatus": "Disabled",
+    "sanctions": []
+  },
+  {
+    "memberId": 4,
+    "firstName": "Valentina",
+    "lastName": "Perez",
+    "email": "valentina.perez@example.com",
+    "address": "321 San Juan St, Rosario",
+    "phone": "+54 341 4567890",
+    "memberStatus": "Enabled",
+    "sanctions": [
+      {
+        "idSanction": 3,
+        "sanctionDate": "2025-04-15T00:00:00Z",
+        "sanctionDays": 10
+      }
+    ]
+  },
+  {
+    "memberId": 5,
+    "firstName": "Sofía",
+    "lastName": "Ruiz",
+    "email": "sofia.ruiz@example.com",
+    "address": "987 Mendoza St, Rosario",
+    "phone": "+54 341 5678901",
+    "memberStatus": "Enabled",
+    "sanctions": []
+  },
+  {
+    "memberId": 6,
+    "firstName": "Mateo",
+    "lastName": "Lopez",
+    "email": "mateo.lopez@example.com",
+    "address": "654 Santa Fe St, Rosario",
+    "phone": "+54 341 6789012",
+    "memberStatus": "Enabled",
+    "sanctions": [
+      {
+        "idSanction": 8,
+        "sanctionDate": "2025-03-18T00:00:00Z",
+        "sanctionDays": 5
+      },
+      {
+        "idSanction": 9,
+        "sanctionDate": "2025-06-05T00:00:00Z",
+        "sanctionDays": 10
+      }
+    ]
+  },
+  {
+    "memberId": 7,
+    "firstName": "Agustina",
+    "lastName": "Ramirez",
+    "email": "agustina.ramirez@example.com",
+    "address": "147 Rioja St, Rosario",
+    "phone": "+54 341 7890123",
+    "memberStatus": "Enabled",
+    "sanctions": []
+  },
+  {
+    "memberId": 8,
+    "firstName": "Tomás",
+    "lastName": "Herrera",
+    "email": "tomas.herrera@example.com",
+    "address": "258 Catamarca St, Rosario",
+    "phone": "+54 341 8901234",
+    "memberStatus": "Sanctioned",
+    "sanctions": [
+      {
+        "idSanction": 12,
+        "sanctionDate": "2025-01-10T00:00:00Z",
+        "sanctionDays": 20
+      }
+    ]
+  }
+]

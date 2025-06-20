@@ -134,3 +134,35 @@ Content-Type: application/json
 
 ###
 DELETE http://localhost:3000/sanctions/5
+
+
+
+### MEMBER
+###
+GET http://localhost:3000/members
+
+###
+GET http://localhost:3000/members/2
+
+###
+POST http://localhost:3000/members
+Content-Type: application/json
+
+{
+  "firstName": "Tincho",
+  "lastName": "Galva",
+  "email": "martingalvano174@gmail.com",
+  "address": "1336 Zeballos",
+  "phone": "+54 341 3001515"
+}
+
+###
+PATCH http://localhost:3000/members/9
+Content-Type: application/json
+
+{
+  "memberStatus": "Enabled"
+}
+
+###
+DELETE http://localhost:3000/members/9

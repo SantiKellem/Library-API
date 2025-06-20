@@ -4,12 +4,12 @@ import { ValidateSanction, ValidatePartialSanction } from '../utils/validateSact
 
 export class SanctionsController {
 
-    static getAll(req: Request, res: Response) {
+    static getSanctions(req: Request, res: Response) {
         const sanctions = SanctionsModel.getAll();
         res.json(sanctions);
     }
 
-    static getById(req: Request, res: Response) {
+    static getSanctionById(req: Request, res: Response) {
         const id = req.params.id;
 
         if (isNaN(+id)) 
@@ -23,9 +23,9 @@ export class SanctionsController {
     }
 
     // TODO --> create
-    static create(req: Request, res: Response) {}
+    static createSanction(req: Request, res: Response) {}
     
-    static update(req: Request, res: Response) {
+    static updateSanction(req: Request, res: Response) {
         const id = req.params.id;
         const SanctionData = ValidatePartialSanction(req.body);
 
@@ -34,7 +34,6 @@ export class SanctionsController {
 
         if (isNaN(+id)) 
             return res.status(400).json({ error: "ID sent must be a number" })
-        
 
         const sanction = SanctionsModel.update(SanctionData.data, +id);
         if (sanction == undefined)
@@ -42,7 +41,7 @@ export class SanctionsController {
         return res.status(201).json(sanction);
     }
 
-    static delete(req: Request, res: Response) {
+    static deleteSanction(req: Request, res: Response) {
         const id = req.params.id;
 
         if (isNaN(+id))
