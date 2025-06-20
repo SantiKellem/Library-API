@@ -1,0 +1,77 @@
+[
+  {
+    "sanctionId": 1,
+    "sanctionDate": "2025-06-01T00:00:00Z",
+    "sanctionDays": 2
+  },
+  {
+    "sanctionId": 2,
+    "sanctionDate": "2025-08-03T00:00:00Z",
+    "sanctionDays": 5
+  },
+  {
+    "sanctionId": 3,
+    "sanctionDate": "2025-06-05T00:00:00Z",
+    "sanctionDays": 10
+  },
+  {
+    "sanctionId": 4,
+    "sanctionDate": "2025-01-06T00:00:00Z",
+    "sanctionDays": 2
+  },
+  {
+    "sanctionId": 5,
+    "sanctionDate": "2025-09-10T00:00:00Z",
+    "sanctionDays": 20
+  },
+  {
+    "sanctionId": 6,
+    "sanctionDate": "2025-01-12T00:00:00Z",
+    "sanctionDays": 30
+  },
+  {
+    "sanctionId": 7,
+    "sanctionDate": "2025-02-13T00:00:00Z",
+    "sanctionDays": 5
+  },
+  {
+    "sanctionId": 8,
+    "sanctionDate": "2025-03-14T00:00:00Z",
+    "sanctionDays": 10
+  },
+  {
+    "sanctionId": 9,
+    "sanctionDate": "2025-04-15T00:00:00Z",
+    "sanctionDays": 2
+  },
+  {
+    "sanctionId": 10,
+    "sanctionDate": "2025-05-16T00:00:00Z",
+    "sanctionDays": 20
+  },
+  {
+    "sanctionId": 11,
+    "sanctionDate": "2025-05-17T00:00:00Z",
+    "sanctionDays": 30
+  },
+  {
+    "sanctionId": 12,
+    "sanctionDate": "2025-11-18T00:00:00Z",
+    "sanctionDays": 5
+  },
+  {
+    "sanctionId": 13,
+    "sanctionDate": "2025-12-19T00:00:00Z",
+    "sanctionDays": 10
+  },
+  {
+    "sanctionId": 14,
+    "sanctionDate": "2025-06-20T00:00:00Z",
+    "sanctionDays": 2
+  },
+  {
+    "sanctionId": 15,
+    "sanctionDate": "2025-09-21T00:00:00Z",
+    "sanctionDays": 20
+  }
+]

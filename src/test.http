@@ -102,3 +102,35 @@ Content-Type: application/json
 {
   "maxPendingBooks": 7
 }
+
+
+
+### SANCTION
+###
+GET http://localhost:3000/sanctions
+
+###
+GET http://localhost:3000/sanctions/5
+
+<!-- TODO -> CREATE SANCTION
+###
+POST http://localhost:3000/sanctions
+Content-Type: application/json
+  
+{
+  "sanctionDate": "2025-06-01T00:00:00Z",
+  "sanctionDays": 10
+}
+-->
+
+###
+PATCH http://localhost:3000/sanctions/5
+Content-Type: application/json
+
+{
+  "sanctionDate": "2024-12-25T23:59:59Z",
+  "sanctionDays": 2
+}
+
+###
+DELETE http://localhost:3000/sanctions/5
