@@ -1,59 +1,60 @@
-import { Member } from '../interfaces/members.js';
-import { Sanction } from '../interfaces/sanctions.js';
-import { getNewId } from '../utils/getNewId.js';
+import { Uuid } from '../interfaces/members.js';
 import { MemberSchemaType, MemberPartialSchemaType } from '../utils/validateMember.js';
-import { createRequire } from 'node:module';
-const require = createRequire(import.meta.url);
-const Members: Member[] = require("../mocks/members.json");
+import { PrismaClient, Member } from '@prisma/client';
+
+const prisma = new PrismaClient()
 
 export class MembersModel {
 
-    static getAll(): Member[] {
-        return Members;
+    static getAll(): Promise<Member[]> {
+        return prisma.member.findMany();
     }
 
-    static getById(id: number): Member | undefined {
-        const member = Members.find(m => m.memberId == id);
-        return member;
+    static getById(id: Uuid): Promise<Member | null> {
+        return prisma.member.findUnique({
+            where: { memberId: id }
+        });
     }
 
-    static create(data: MemberSchemaType): Member {
-        const memberId = getNewId(Members, "memberId");
-        const sanctions: Sanction[] = [];
-        const newMember: Member = {
-            memberId,
-            ...data,
-            memberStatus: "Enabled",
-            sanctions: sanctions
-        }
-        Members.push(newMember);
+    static async create(data: MemberSchemaType): Promise<Member | null> {
+        const member = await prisma.member.findUnique({
+            where: { email: data.email }
+        });
+    
+        if (member !== null) return null;
+
+        const memberId = crypto.randomUUID();
+        const newMember = prisma.member.create({
+            data: {
+                memberId,
+                ...data
+            }
+        })
         return newMember;
     }
 
-    static update(data: MemberPartialSchemaType, id: number): Member | undefined {
-        const i = Members.findIndex(m => m.memberId == id);
-
-        if (i !== -1) {
-            const member: Member = {
-                ...Members[i],
-                ...data
-            }
-            Members[i] = member;
-            return member;
-        }
-
-        return undefined;
+    static async update(data: MemberPartialSchemaType, id: Uuid): Promise<Member | null> {
+        const member = await prisma.member.findUnique({
+          where: { memberId: id }
+        });
+    
+        if (!member) return null;
+    
+        return await prisma.member.update({
+            where: { memberId: id },
+            data: { ...data }
+        });
     }
 
-    static delete(id: number): Member | undefined {
-        const i = Members.findIndex(m => m.memberId == id);
-
-        if (i !== -1) {
-            const oldMember = Members[i];
-            Members.splice(i, 1);
-            return oldMember;
-        }
-
-        return undefined;
+    static async delete(id: Uuid): Promise<Member | null> {
+        const member = await prisma.member.findUnique({
+          where: { memberId: id }
+        });
+    
+        if (!member) return null;
+    
+        return await prisma.member.delete({
+          where: { memberId: id }
+        });
     }
 }

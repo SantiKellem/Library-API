@@ -1,0 +1,92 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Book {
+  bookId        Int      @id
+  isbn          String   @db.VarChar(13)
+  title         String   @db.VarChar(255)
+  editionNumber String   @db.VarChar(4)
+  editionDate   DateTime @db.Timestamptz(6)
+  maxLoanDays   Int
+  Copies        Copy[]
+}
+
+model Copy {
+  copyId Int   @id
+  bookId Int 
+  Books  Book @relation(fields: [bookId], references: [bookId], onDelete: Cascade, onUpdate: Cascade, map: "bookId")
+  
+  @@index(bookId)
+}
+
+model LoanDetail {
+  loanId                Int
+  detailNumber          Int
+  theoreticalReturnDate DateTime            @db.Timestamptz(6)
+  actualReturnDate      DateTime?           @db.Timestamptz(6)
+  loanLineStatus        loanlinestatus_enum
+  Loans                 Loan               @relation(fields: [loanId], references: [loanId], onDelete: Cascade, onUpdate: Cascade)
+
+  @@id([loanId, detailNumber])
+  @@index(loanId)
+}
+
+model LoanPolicy {
+  maxPendingBooks Int @id
+}
+
+model Loan {
+  loanId      Int           @id @default(autoincrement())
+  loanDate    DateTime      @db.Timestamptz(6)
+  memberId    String        @db.Uuid
+  LoanDetails LoanDetail[]
+  Members     Member       @relation(fields: [memberId], references: [memberId], onDelete: Cascade, onUpdate: Cascade, map: "member")
+
+  @@index(memberId)
+}
+
+model Member {
+  memberId     String            @id @db.Uuid
+  firstName    String            @db.VarChar(255)
+  lastName     String            @db.VarChar(255)
+  email        String            @unique(map: "uniqueEmail") @db.VarChar(255)
+  address      String            @db.VarChar(255)
+  phone        String            @db.VarChar(255)
+  memberStatus memberstatus_enum @default(Enabled)
+  Loans        Loan[]
+  Sanctions    Sanction[]
+
+  @@index(email)
+}
+
+model SanctionPolicy {
+  idSanctionPolicy Int @id
+  daysLateFrom     Int
+  daysLateTo       Int
+  sanctionDays     Int
+}
+
+model Sanction {
+  sanctionId   Int      @id
+  sanctionDate DateTime @db.Timestamptz(6)
+  sanctionDays Int
+  memberId     String   @db.Uuid
+  Members      Member  @relation(fields: [memberId], references: [memberId], onDelete: Cascade, onUpdate: Cascade, map: "member")
+}
+
+enum loanlinestatus_enum {
+  Pending
+  Returned
+}
+
+enum memberstatus_enum {
+  Enabled
+  Disabled
+  Sanctioned
+}

@@ -1,60 +1,67 @@
 import { Request, Response } from 'express';
 import { ValidateMember, ValidatePartialMember } from '../utils/validateMember.js';
 import { MembersModel } from '../models/MembersModel.js';
+import { isValidUuid } from '../utils/isValidUuid.js';
 
 export class MembersController {
 
-    static getMembers(req: Request, res: Response) {
-        const members = MembersModel.getAll();
+    static async getMembers(req: Request, res: Response) {
+        const members = await MembersModel.getAll();
         res.json(members);
     }
 
-    static getMemberById(req: Request, res: Response) {
+    static async getMemberById(req: Request, res: Response) {
         const id = req.params.id;
 
-        if (isNaN(+id))
-            return res.status(400).json({ error: "ID sent must be a number" });
+        if (!isValidUuid(id)) {
+            return res.status(400).json({ error: "ID sent must be an UUID"})
+        }
 
-        const member = MembersModel.getById(+id);
-        if (member == undefined)
+        const member = await MembersModel.getById(id);
+        if (member == null)
             return res.status(404).json({ error: "Member not found" });
         return res.json(member);
     }
 
-    static createMember(req: Request, res: Response) {
+    static async createMember(req: Request, res: Response) {
         const MemberData = ValidateMember(req.body);
 
         if (!MemberData.success) 
             return res.status(400).json({ error: JSON.parse(MemberData.error.message) });
 
-        const newMember = MembersModel.create(MemberData.data);
+        const newMember = await MembersModel.create(MemberData.data);
+        if (newMember == null)
+            return res.status(409).json({ error: "Email already exists" });
+
         return res.status(201).json(newMember);
     }
 
-    static updateMember(req: Request, res: Response) {
+    static async updateMember(req: Request, res: Response) {
         const MemberData = ValidatePartialMember(req.body);
         const id = req.params.id;
 
         if (!MemberData.success) 
             return res.status(400).json({ error: JSON.parse(MemberData.error.message) });
 
-        if (isNaN(+id))
-            return res.status(400).json({ error: "ID sent must be a number" });
+        if (!isValidUuid(id)) {
+            return res.status(400).json({ error: "ID sent must be an UUID"})
+        }
 
-        const updatedMember = MembersModel.update(MemberData.data, +id);
-        if (updatedMember == undefined)
+        const updatedMember = await MembersModel.update(MemberData.data, id);
+        if (updatedMember == null)
             return res.status(404).json({ error: "Member not found" });
         return res.status(201).json(updatedMember);
     }
 
-    static deleteMember(req: Request, res: Response) {
+    static async deleteMember(req: Request, res: Response) {
         const id = req.params.id;
 
-        if (isNaN(+id))
-            return res.status(400).json({ error: "ID sent must be a number" });
+        if (!isValidUuid(id)) {
+            return res.status(400).json({ error: "ID sent must be an UUID"})
+        }
 
-        const oldMember = MembersModel.delete(+id);
-        if (oldMember == undefined)
+        const oldMember = await MembersModel.delete(id);
+        if (oldMember == null)
             return res.status(404).json({ error: "Member not found" });
         return res.json(oldMember);
     }

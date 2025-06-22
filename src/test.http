@@ -142,27 +142,28 @@ DELETE http://localhost:3000/sanctions/5
 GET http://localhost:3000/members
 
 ###
-GET http://localhost:3000/members/2
+GET http://localhost:3000/members/957623a0-d86e-43a3-9dbc-25eb96140044
 
 ###
 POST http://localhost:3000/members
 Content-Type: application/json
 
 {
-  "firstName": "Tincho",
-  "lastName": "Galva",
+  "firstName": "Santiago",
+  "lastName": "Kellemberger",
   "email": "martingalvano174@gmail.com",
   "address": "1336 Zeballos",
   "phone": "+54 341 3001515"
 }
 
 ###
-PATCH http://localhost:3000/members/9
+PATCH http://localhost:3000/members/9e195349-85a2-492f-a925-0ae31325772e
 Content-Type: application/json
 
 {
-  "memberStatus": "Enabled"
+  "firstName": "Martin",
+  "lastName": "Galvano"
 }
 
 ###
-DELETE http://localhost:3000/members/9
+DELETE http://localhost:3000/members/957623a0-d86e-43a3-9dbc-25eb96140044

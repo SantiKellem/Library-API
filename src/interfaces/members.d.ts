@@ -1,9 +1,10 @@
 import { Sanction } from "./sanctions.js";
 
-export type MemberStatus = "Enabled" | "Disabled" | "Sanctioned";
+type MemberStatus = "Enabled" | "Disabled" | "Sanctioned";
+export type Uuid = `${string}-${string}-${string}-${string}-${string}`;
 
 export interface Member {
-    memberId: number,
+    memberId: Uuid,
     firstName: string,
     lastName: string,
     email: string,
