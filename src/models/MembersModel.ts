@@ -24,23 +24,32 @@ export class MembersModel {
         if (member !== null) return null;
 
         const memberId = crypto.randomUUID();
-        const newMember = prisma.member.create({
+        return prisma.member.create({
             data: {
                 memberId,
                 ...data
             }
-        })
-        return newMember;
+        });
     }
 
-    static async update(data: MemberPartialSchemaType, id: Uuid): Promise<Member | null> {
+    static async update(data: MemberPartialSchemaType, id: Uuid): Promise<Member | null | number> {
         const member = await prisma.member.findUnique({
-          where: { memberId: id }
+            where: { memberId: id }
         });
-    
+
+        if (data.email) {
+            const emailExists = await prisma.member.findFirst({
+                where: {
+                    email: data.email,
+                    memberId: { not: id }
+                }
+            });
+            if (emailExists) return -1;
+        }
+
         if (!member) return null;
     
-        return await prisma.member.update({
+        return prisma.member.update({
             where: { memberId: id },
             data: { ...data }
         });
@@ -48,13 +57,13 @@ export class MembersModel {
 
     static async delete(id: Uuid): Promise<Member | null> {
         const member = await prisma.member.findUnique({
-          where: { memberId: id }
+            where: { memberId: id }
         });
     
         if (!member) return null;
     
-        return await prisma.member.delete({
-          where: { memberId: id }
+        return prisma.member.delete({
+            where: { memberId: id }
         });
     }
 }

@@ -1,52 +1,51 @@
-import { Book } from '../interfaces/books.js';
-import { Copy } from '../interfaces/copies.js';
-import { getNewId } from '../utils/getNewId.js';
-import { createRequire } from "node:module";
-const require = createRequire(import.meta.url);
-const Copies: Copy[] = require("../mocks/copies.json");
+import { PrismaClient, Copy } from '@prisma/client';
+
+const prisma = new PrismaClient()
 
 export class CopiesModel {
 
-    static getCopies(): Copy[] {
-        return Copies;
+    static getCopies(): Promise<Copy[]> {
+        return prisma.copy.findMany({
+            orderBy: { copyId: 'asc' },
+            include: { Books: true}
+        });
     }
 
-    static getCopyById(id: number): Copy | undefined {
-        const copy = Copies.find(c => c.copyId == id);
-        return copy;
+    static getCopyById(id: number): Promise<Copy | null> {
+        return prisma.copy.findUnique({
+            where: { copyId: id },
+            include: { Books: true }
+        });
     }
 
-    static createCopy(book: Book): Copy {
-        const copyId = getNewId(Copies, "copyId");
-        const newCopy = {
-            copyId,
-            book: book
-        }
-        Copies.push(newCopy);
-        return newCopy;
+    static createCopy(bookId: number): Promise<Copy> {
+        return prisma.copy.create({
+            data: { bookId: bookId }
+        });
     }   
 
-    static updateCopy(book: Book, id: number): Copy | undefined {
-        const i = Copies.findIndex(c => c.copyId == id);
+    static async updateCopy(bookId: number, id: number): Promise<Copy | null> {
+        const copyExists = await prisma.copy.findUnique({
+            where: { copyId: id }
+        })
         
-        if (i !== -1) {
-            Copies[i].book = book;
-            return Copies[i];
-        }
+        if (!copyExists) return null;
 
-        return undefined
+        return prisma.copy.update({
+            where: { copyId: id },
+            data: { bookId: bookId }
+        });
     }
 
-    static deleteCopy(id: number): Copy | undefined {
-        const i = Copies.findIndex(c => c.copyId == id);
+    static async deleteCopy(id: number): Promise<Copy | null> {
+        const copyExists = await prisma.copy.findUnique({
+            where: { copyId: id }
+        })
+        
+        if (!copyExists) return null;
 
-        if (i !== -1) {
-            const oldCopy = Copies[i];
-            Copies.splice(i, 1);
-            return oldCopy;
-        }
-
-        return undefined
+        return prisma.copy.delete({
+            where: { copyId: id }
+        });
     }
-
 }

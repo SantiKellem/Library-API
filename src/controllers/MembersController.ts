@@ -50,6 +50,8 @@ export class MembersController {
         const updatedMember = await MembersModel.update(MemberData.data, id);
         if (updatedMember == null)
             return res.status(404).json({ error: "Member not found" });
+        else if (updatedMember == -1)
+            return res.status(409).json({ error: "Email already exists" });
         return res.status(201).json(updatedMember);
     }
 

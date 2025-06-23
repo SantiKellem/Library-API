@@ -8,7 +8,7 @@ datasource db {
 }
 
 model Book {
-  bookId        Int      @id
+  bookId        Int      @id @default(autoincrement())
   isbn          String   @db.VarChar(13)
   title         String   @db.VarChar(255)
   editionNumber String   @db.VarChar(4)
@@ -18,7 +18,7 @@ model Book {
 }
 
 model Copy {
-  copyId Int   @id
+  copyId Int   @id @default(autoincrement())
   bookId Int 
   Books  Book @relation(fields: [bookId], references: [bookId], onDelete: Cascade, onUpdate: Cascade, map: "bookId")
   
@@ -66,14 +66,14 @@ model Member {
 }
 
 model SanctionPolicy {
-  idSanctionPolicy Int @id
+  idSanctionPolicy Int @id @default(autoincrement())
   daysLateFrom     Int
   daysLateTo       Int
   sanctionDays     Int
 }
 
 model Sanction {
-  sanctionId   Int      @id
+  sanctionId   Int      @id @default(autoincrement())
   sanctionDate DateTime @db.Timestamptz(6)
   sanctionDays Int
   memberId     String   @db.Uuid

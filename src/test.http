@@ -3,7 +3,7 @@
 GET http://localhost:3000/books
 
 ###
-GET http://localhost:3000/books/7
+GET http://localhost:3000/books/2
 
 ###
 POST http://localhost:3000/books
@@ -18,7 +18,7 @@ Content-Type: application/json
 }
 
 ###
-PATCH http://localhost:3000/books/1
+PATCH http://localhost:3000/books/17
 Content-Type: application/json
 
 {
@@ -27,7 +27,7 @@ Content-Type: application/json
 }
 
 ###
-DELETE http://localhost:3000/books/7
+DELETE http://localhost:3000/books/8
 
 
 
@@ -36,14 +36,14 @@ DELETE http://localhost:3000/books/7
 GET http://localhost:3000/copies
 
 ###
-GET http://localhost:3000/copies/7
+GET http://localhost:3000/copies/2
 
 ###
 POST http://localhost:3000/copies
 Content-Type: application/json
 
 {
-  "bookId": 10
+  "bookId": 6
 }
 
 ###
@@ -51,12 +51,12 @@ PATCH http://localhost:3000/copies
 Content-Type: application/json
 
 {
-  "copyId": 16,
+  "copyId": 2,
   "bookId": 9
 }
 
 ###
-DELETE http://localhost:3000/copies/7
+DELETE http://localhost:3000/copies/5
 
 
 
@@ -72,9 +72,9 @@ POST http://localhost:3000/sanctionPolicies
 Content-Type: application/json
 
 {
-  "daysLateFrom": 61,
-  "daysLateTo": 120,
-  "sanctionDays": 90
+  "daysLateFrom": 28,
+  "daysLateTo": 999,
+  "sanctionDays": 45
 }
 
 ###
@@ -82,8 +82,8 @@ PATCH http://localhost:3000/sanctionPolicies/5
 Content-Type: application/json
 
 {
-  "daysLateTo": 60,
-  "sanctionDays": 151510510
+  "daysLateTo": 999,
+  "sanctionDays": 45
 }
 
 ###
@@ -142,28 +142,27 @@ DELETE http://localhost:3000/sanctions/5
 GET http://localhost:3000/members
 
 ###
-GET http://localhost:3000/members/957623a0-d86e-43a3-9dbc-25eb96140044
+GET http://localhost:3000/members/a5ff1c98-dff5-459f-9a5d-0ae66aa681ba
 
 ###
 POST http://localhost:3000/members
 Content-Type: application/json
 
 {
-  "firstName": "Santiago",
-  "lastName": "Kellemberger",
-  "email": "martingalvano174@gmail.com",
-  "address": "1336 Zeballos",
-  "phone": "+54 341 3001515"
+  "firstName": "Shakir",
+  "lastName": "Chaya",
+  "email": "shakirchaya@gmail.com",
+  "address": "Italia 3214",
+  "phone": "+54 341 0205877"
 }
 
 ###
-PATCH http://localhost:3000/members/9e195349-85a2-492f-a925-0ae31325772e
+PATCH http://localhost:3000/members/a5ff1c98-dff5-459f-9a5d-0ae66aa681ba
 Content-Type: application/json
 
 {
-  "firstName": "Martin",
-  "lastName": "Galvano"
+  "email": "shakirboca@gmail.com"
 }
 
 ###
-DELETE http://localhost:3000/members/957623a0-d86e-43a3-9dbc-25eb96140044
+DELETE http://localhost:3000/members/2ccab851-460b-4ee9-aa57-4bd90ce80db0
