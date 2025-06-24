@@ -119,7 +119,8 @@ Content-Type: application/json
   
 {
   "sanctionDate": "2025-06-01T00:00:00Z",
-  "sanctionDays": 10
+  "sanctionDays": 10,
+  "memberId": 09520766-cffe-4d1d-acf8-8b2e1aef8247
 }
 -->
 

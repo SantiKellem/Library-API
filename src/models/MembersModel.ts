@@ -1,4 +1,4 @@
-import { Uuid } from '../interfaces/members.js';
+import { UUID } from 'crypto';
 import { MemberSchemaType, MemberPartialSchemaType } from '../utils/validateMember.js';
 import { PrismaClient, Member } from '@prisma/client';
 
@@ -10,7 +10,7 @@ export class MembersModel {
         return prisma.member.findMany();
     }
 
-    static getById(id: Uuid): Promise<Member | null> {
+    static getById(id: UUID): Promise<Member | null> {
         return prisma.member.findUnique({
             where: { memberId: id }
         });
@@ -32,7 +32,7 @@ export class MembersModel {
         });
     }
 
-    static async update(data: MemberPartialSchemaType, id: Uuid): Promise<Member | null | number> {
+    static async update(data: MemberPartialSchemaType, id: UUID): Promise<Member | null | number> {
         const member = await prisma.member.findUnique({
             where: { memberId: id }
         });
@@ -55,7 +55,7 @@ export class MembersModel {
         });
     }
 
-    static async delete(id: Uuid): Promise<Member | null> {
+    static async delete(id: UUID): Promise<Member | null> {
         const member = await prisma.member.findUnique({
             where: { memberId: id }
         });

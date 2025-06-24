@@ -1,7 +1,6 @@
 import { Sanction } from "./sanctions.js";
 
 type MemberStatus = "Enabled" | "Disabled" | "Sanctioned";
-export type Uuid = `${string}-${string}-${string}-${string}-${string}`;
 
 export interface Member {
     memberId: Uuid,

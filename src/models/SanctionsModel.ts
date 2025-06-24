@@ -1,3 +1,4 @@
+import { UUID } from "crypto";
 import { SanctionSchemaType, SanctionPartialSchemaType } from "../utils/validateSaction.js";
 import { PrismaClient, Sanction } from '@prisma/client';
 
@@ -18,10 +19,19 @@ export class SanctionsModel {
         });
     }
 
-    static create(data: SanctionSchemaType): Promise<Sanction> {
+    static async create(data: SanctionSchemaType, memberId: UUID): Promise<Sanction | null> {
+        const member = await prisma.member.findUnique({
+            where: { memberId: memberId }
+        });
+        
+        if (!member) return null;
+
         return prisma.sanction.create({
-            data: { ...data }
-        })
+            data: { 
+                ...data,
+                memberId: memberId
+            }
+        });
     }
 
     static async update(data: SanctionPartialSchemaType, id: number): Promise<Sanction | null> {
