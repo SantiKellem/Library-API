@@ -1,55 +1,51 @@
-import { Sanction } from "../interfaces/sanctions.js";
-import { getNewId } from "../utils/getNewId.js";
 import { SanctionSchemaType, SanctionPartialSchemaType } from "../utils/validateSaction.js";
-import { createRequire } from "node:module";
-const require = createRequire(import.meta.url);
-const Sanctions: Sanction[] = require("../mocks/sanctions.json");
+import { PrismaClient, Sanction } from '@prisma/client';
+
+const prisma = new PrismaClient()
 
 export class SanctionsModel {
 
-    static getAll(): Sanction[] {
-        return Sanctions;
+    static getAll(): Promise<Sanction[]> {
+        return prisma.sanction.findMany({
+            orderBy: { sanctionId: 'asc' },
+            include: { Members: true }
+        });
     }
 
-    static getById(id: number): Sanction | undefined {
-        const sanction = Sanctions.find(s => s.sanctionId == id);
-        return sanction;
+    static getById(id: number): Promise<Sanction | null> {
+        return prisma.sanction.findUnique({
+            where: { sanctionId: id }
+        });
     }
 
-    static create(data: SanctionSchemaType): Sanction {
-        const sanctionId = getNewId(Sanctions, "sanctionId");
-        const newSanction: Sanction = {
-            sanctionId,
-            ...data
-        }
-        Sanctions.push(newSanction);
-        return newSanction;
+    static create(data: SanctionSchemaType): Promise<Sanction> {
+        return prisma.sanction.create({
+            data: { ...data }
+        })
     }
 
-    static update(data: SanctionPartialSchemaType, id: number): Sanction | undefined {
-        const i = Sanctions.findIndex(s => s.sanctionId == id);
+    static async update(data: SanctionPartialSchemaType, id: number): Promise<Sanction | null> {
+        const sanctionExists = await prisma.sanction.findUnique({
+            where: { sanctionId: id }
+        });
 
-        if (i !== -1) {
-            const sanction: Sanction = {
-                ...Sanctions[i],
-                ...data
-            }
-            Sanctions[i] = sanction;
-            return sanction;
-        }
+        if (!sanctionExists) return null;
 
-        return undefined;
+        return prisma.sanction.update({
+            where: { sanctionId: id },
+            data: { ...data }
+        });
     }
 
-    static delete(id: number): Sanction | undefined {
-        const i = Sanctions.findIndex(s => s.sanctionId == id);
+    static async delete(id: number): Promise<Sanction | null> {
+        const sanctionExists = await prisma.sanction.findUnique({
+            where: { sanctionId: id }
+        });
 
-        if (i !== -1) {
-            const oldSanction = Sanctions[i];
-            Sanctions.splice(i, 1);
-            return oldSanction;
-        }
+        if (!sanctionExists) return null;
 
-        return undefined;
+        return prisma.sanction.delete({
+            where: { sanctionId: id },
+        });
     }
 }

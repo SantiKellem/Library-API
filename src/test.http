@@ -100,7 +100,7 @@ POST http://localhost:3000/loanPolicy
 Content-Type: application/json
 
 {
-  "maxPendingBooks": 7
+  "maxPendingBooks": 5
 }
 
 

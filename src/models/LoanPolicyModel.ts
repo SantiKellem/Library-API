@@ -1,20 +1,16 @@
-import { LoanPolicy } from "../interfaces/loanPolicy.js";
-import { createRequire } from "node:module";
-const require = createRequire(import.meta.url);
-let loanPolicy: LoanPolicy = require("../mocks/loanPolicy.json");
+import { PrismaClient, LoanPolicy } from '@prisma/client';
+
+const prisma = new PrismaClient()
 
 export class LoanPolicyModel {
 
-    static get(): LoanPolicy {
-        return loanPolicy;
+    static get(): Promise<LoanPolicy[]> {
+        return prisma.loanPolicy.findMany();
     }
 
-    static create(maxPendingBooks: number): LoanPolicy {
-        const newPolicy: LoanPolicy = {
-            maxPendingBooks
-        }
-
-        loanPolicy = newPolicy;
-        return newPolicy;
+    static create(maxPendingBooks: number): Promise<LoanPolicy> {
+        return prisma.loanPolicy.create({
+            data: { maxPendingBooks: maxPendingBooks }
+        })
     }
 }

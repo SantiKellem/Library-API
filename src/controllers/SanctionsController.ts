@@ -4,28 +4,28 @@ import { ValidateSanction, ValidatePartialSanction } from '../utils/validateSact
 
 export class SanctionsController {
 
-    static getSanctions(req: Request, res: Response) {
-        const sanctions = SanctionsModel.getAll();
+    static async getSanctions(req: Request, res: Response) {
+        const sanctions = await SanctionsModel.getAll();
         res.json(sanctions);
     }
 
-    static getSanctionById(req: Request, res: Response) {
+    static async getSanctionById(req: Request, res: Response) {
         const id = req.params.id;
 
         if (isNaN(+id)) 
             return res.status(400).json({ error: "ID sent must be a number" });
         
 
-        const sanction = SanctionsModel.getById(+id);
+        const sanction = await SanctionsModel.getById(+id);
         if (sanction == undefined) 
             return res.status(404).json({ error: "Sanction not found" });
         return res.json(sanction);
     }
 
     // TODO --> create
-    static createSanction(req: Request, res: Response) {}
+    static async createSanction(req: Request, res: Response) {}
     
-    static updateSanction(req: Request, res: Response) {
+    static async updateSanction(req: Request, res: Response) {
         const id = req.params.id;
         const SanctionData = ValidatePartialSanction(req.body);
 
@@ -35,19 +35,19 @@ export class SanctionsController {
         if (isNaN(+id)) 
             return res.status(400).json({ error: "ID sent must be a number" })
 
-        const sanction = SanctionsModel.update(SanctionData.data, +id);
+        const sanction = await SanctionsModel.update(SanctionData.data, +id);
         if (sanction == undefined)
             return res.status(404).json({ error: "Sanction not found" })
         return res.status(201).json(sanction);
     }
 
-    static deleteSanction(req: Request, res: Response) {
+    static async deleteSanction(req: Request, res: Response) {
         const id = req.params.id;
 
         if (isNaN(+id))
             return res.status(400).json({ error: "ID sent must be a number" });
 
-        const oldSanction = SanctionsModel.delete(+id);
+        const oldSanction = await SanctionsModel.delete(+id);
         if (oldSanction == undefined)
             return res.status(404).json({ error: "Sanction not found" });
         return res.json(oldSanction);
