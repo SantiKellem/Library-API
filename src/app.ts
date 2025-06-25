@@ -5,6 +5,7 @@ import { SanctionPoliciesRouter } from './routes/SanctionPoliciesRoute.js';
 import { LoanPolicyRouter } from './routes/LoanPolicyRoute.js';
 import { SanctionsRouter } from './routes/SanctionsRoute.js'
 import { MembersRouter } from './routes/MembersRoute.js';
+import { MakeLoanRouter } from './routes/MakeLoanRoute.js';
 
 const app = express();
 
@@ -18,6 +19,7 @@ app.use("/sanctionPolicies", SanctionPoliciesRouter);
 app.use("/loanPolicy", LoanPolicyRouter);
 app.use("/sanctions", SanctionsRouter);
 app.use("/members", MembersRouter);
+app.use("/makeLoan", MakeLoanRouter);
 
 app.use((req, res) => {
     res.status(404).send('Not Found');

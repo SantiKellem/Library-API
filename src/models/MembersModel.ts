@@ -16,13 +16,13 @@ export class MembersModel {
         });
     }
 
-    static async create(data: MemberSchemaType): Promise<Member | null> {
-        const member = await prisma.member.findUnique({
-            where: { email: data.email }
+    static getByEmail(email: string): Promise<Member | null> {
+        return prisma.member.findFirst({
+                where: { email: email }
         });
-    
-        if (member !== null) return null;
+    }
 
+    static async create(data: MemberSchemaType): Promise<Member> {
         const memberId = crypto.randomUUID();
         return prisma.member.create({
             data: {
@@ -32,20 +32,10 @@ export class MembersModel {
         });
     }
 
-    static async update(data: MemberPartialSchemaType, id: UUID): Promise<Member | null | number> {
+    static async update(data: MemberPartialSchemaType, id: UUID): Promise<Member | null> {
         const member = await prisma.member.findUnique({
             where: { memberId: id }
         });
-
-        if (data.email) {
-            const emailExists = await prisma.member.findFirst({
-                where: {
-                    email: data.email,
-                    memberId: { not: id }
-                }
-            });
-            if (emailExists) return -1;
-        }
 
         if (!member) return null;
     

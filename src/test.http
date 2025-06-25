@@ -167,3 +167,9 @@ Content-Type: application/json
 
 ###
 DELETE http://localhost:3000/members/2ccab851-460b-4ee9-aa57-4bd90ce80db0
+
+
+
+### MAKE LOAN USE CASE
+###
+GET http://localhost:3000/makeLoan/searchMember/2ccab851-460b-4ee9-aa57-4bd90ce80db0

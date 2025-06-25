@@ -29,10 +29,11 @@ export class MembersController {
         if (!MemberData.success) 
             return res.status(400).json({ error: JSON.parse(MemberData.error.message) });
 
-        const newMember = await MembersModel.create(MemberData.data);
-        if (newMember == null)
+        const emailExists = await MembersModel.getByEmail(MemberData.data.email);
+        if (emailExists) 
             return res.status(409).json({ error: "Email already exists" });
 
+        const newMember = await MembersModel.create(MemberData.data);
         return res.status(201).json(newMember);
     }
 
@@ -47,11 +48,15 @@ export class MembersController {
             return res.status(400).json({ error: "ID sent must be an UUID"})
         }
 
+        if (MemberData.data.email) {
+            const emailExists = await MembersModel.getByEmail(MemberData.data.email);
+            if (emailExists) 
+                return res.status(409).json({ error: "Email already exists" });
+        }
+
         const updatedMember = await MembersModel.update(MemberData.data, id);
         if (updatedMember == null)
             return res.status(404).json({ error: "Member not found" });
-        else if (updatedMember == -1)
-            return res.status(409).json({ error: "Email already exists" });
         return res.status(201).json(updatedMember);
     }
 
