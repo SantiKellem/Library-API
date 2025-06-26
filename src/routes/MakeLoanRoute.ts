@@ -6,7 +6,7 @@ const mlc = new MakeLoanController();
 
 MakeLoanRouter.get('/searchMember/:id', (req, res) => { mlc.searchMember(req, res) });
 
-// MakeLoanRouter.post('/selectBook/:id', (req, res) => { mlc.selectBook(req, res) });
+MakeLoanRouter.post('/selectCopy/:id', (req, res) => { mlc.selectCopy(req, res) });
 
 // MakeLoanRouter.post('confirmLoan', (req, res) => { mlc.confirmLoan(req, res) });
 

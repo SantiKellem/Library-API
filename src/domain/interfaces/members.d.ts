@@ -1,16 +1,16 @@
 import { Sanction } from "./sanctions.js";
+import { memberstatus_enum } from "@prisma/client";
 
-type MemberStatus = "Enabled" | "Disabled" | "Sanctioned";
+export type MemberStatus = "Enabled" | "Disabled" | "Sanctioned";
 
-export interface Member {
-    memberId: Uuid,
+export interface IMember {
+    memberId: string,
     firstName: string,
     lastName: string,
     email: string,
     address: string,
     phone: string,
-    memberStatus: MemberStatus,
-    sanctions: Sanction[]
+    memberStatus: memberstatus_enum,
 }
 
 /*

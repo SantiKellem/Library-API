@@ -1,4 +1,4 @@
-export interface LoanPolicy {
+export interface ILoanPolicy {
     maxPendingBooks: number
 }
 

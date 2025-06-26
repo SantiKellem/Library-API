@@ -172,4 +172,7 @@ DELETE http://localhost:3000/members/2ccab851-460b-4ee9-aa57-4bd90ce80db0
 
 ### MAKE LOAN USE CASE
 ###
-GET http://localhost:3000/makeLoan/searchMember/2ccab851-460b-4ee9-aa57-4bd90ce80db0
+GET http://localhost:3000/makeLoan/searchMember/1b5bbc58-400f-4177-878e-866870a93bbd
+
+###
+POST http://localhost:3000/makeLoan/selectCopy/1

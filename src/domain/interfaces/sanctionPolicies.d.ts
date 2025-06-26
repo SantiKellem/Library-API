@@ -1,4 +1,4 @@
-export interface SanctionPolicy {
+export interface ISanctionPolicy {
     idSanctionPolicy: number,
     daysLateFrom: number,
     daysLateTo: number,

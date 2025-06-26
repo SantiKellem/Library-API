@@ -18,11 +18,12 @@ model Book {
 }
 
 model Copy {
-  copyId Int   @id @default(autoincrement())
-  bookId Int 
-  Books  Book @relation(fields: [bookId], references: [bookId], onDelete: Cascade, onUpdate: Cascade, map: "bookId")
-  
-  @@index(bookId)
+  copyId     Int          @id @default(autoincrement())
+  bookId     Int
+  Books      Book         @relation(fields: [bookId], references: [bookId], onDelete: Cascade, map: "bookId")
+  LoanDetail LoanDetail[]
+
+  @@index([bookId])
 }
 
 model LoanDetail {
@@ -31,10 +32,12 @@ model LoanDetail {
   theoreticalReturnDate DateTime            @db.Timestamptz(6)
   actualReturnDate      DateTime?           @db.Timestamptz(6)
   loanLineStatus        loanlinestatus_enum
-  Loans                 Loan               @relation(fields: [loanId], references: [loanId], onDelete: Cascade, onUpdate: Cascade)
+  copyId                Int
+  Copy                  Copy                @relation(fields: [copyId], references: [copyId], onDelete: NoAction, onUpdate: NoAction, map: "CopyFK")
+  Loans                 Loan                @relation(fields: [loanId], references: [loanId], onDelete: Cascade)
 
   @@id([loanId, detailNumber])
-  @@index(loanId)
+  @@index([loanId])
 }
 
 model LoanPolicy {
@@ -42,13 +45,13 @@ model LoanPolicy {
 }
 
 model Loan {
-  loanId      Int           @id @default(autoincrement())
-  loanDate    DateTime      @db.Timestamptz(6)
-  memberId    String        @db.Uuid
+  loanId      Int          @id @default(autoincrement())
+  loanDate    DateTime     @db.Timestamptz(6)
+  memberId    String       @db.Uuid
+  Members     Member       @relation(fields: [memberId], references: [memberId], onDelete: Cascade, map: "member")
   LoanDetails LoanDetail[]
-  Members     Member       @relation(fields: [memberId], references: [memberId], onDelete: Cascade, onUpdate: Cascade, map: "member")
 
-  @@index(memberId)
+  @@index([memberId])
 }
 
 model Member {
@@ -62,7 +65,7 @@ model Member {
   Loans        Loan[]
   Sanctions    Sanction[]
 
-  @@index(email)
+  @@index([email])
 }
 
 model SanctionPolicy {
@@ -77,7 +80,7 @@ model Sanction {
   sanctionDate DateTime @db.Timestamptz(6)
   sanctionDays Int
   memberId     String   @db.Uuid
-  Members      Member  @relation(fields: [memberId], references: [memberId], onDelete: Cascade, onUpdate: Cascade, map: "member")
+  Members      Member   @relation(fields: [memberId], references: [memberId], onDelete: Cascade, map: "member")
 }
 
 enum loanlinestatus_enum {

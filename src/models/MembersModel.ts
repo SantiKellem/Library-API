@@ -1,28 +1,56 @@
 import { UUID } from 'crypto';
 import { MemberSchemaType, MemberPartialSchemaType } from '../utils/validateMember.js';
-import { PrismaClient, Member } from '@prisma/client';
+import { PrismaClient, Sanction } from '@prisma/client';
+import { Member } from '../domain/entities/Member.js';
+import { IMember } from '../domain/interfaces/members.js';
+import { Loan } from '../domain/entities/Loan.js';
 
 const prisma = new PrismaClient()
 
 export class MembersModel {
 
-    static getAll(): Promise<Member[]> {
-        return prisma.member.findMany();
-    }
-
-    static getById(id: UUID): Promise<Member | null> {
-        return prisma.member.findUnique({
-            where: { memberId: id }
+    static getAll(): Promise<IMember[]> {
+        return prisma.member.findMany({
+            include: { Sanctions: true }
         });
     }
 
-    static getByEmail(email: string): Promise<Member | null> {
+    static async getById(id: UUID): Promise<Member | null> {
+        const mem = await prisma.member.findUnique({
+            where: { memberId: id },
+            include: { 
+                Sanctions: true,
+                Loans: true
+            }
+        });
+
+        if (!mem) return null;
+        
+        const loans: Loan[] = [];
+        mem.Loans.forEach(l => loans.push(new Loan(l.loanDate)));
+
+        const sanctions: Sanction[] = mem.Sanctions;
+        return new Member(
+            mem.memberId as UUID,
+            mem.firstName,
+            mem.lastName,
+            mem.email,
+            mem.address,
+            mem.phone,
+            mem.memberStatus,
+            sanctions,
+            loans
+        );
+    }
+
+    static getByEmail(email: string): Promise<IMember | null> {
         return prisma.member.findFirst({
-                where: { email: email }
+            where: { email: email },
+            include: { Sanctions: true }
         });
     }
 
-    static async create(data: MemberSchemaType): Promise<Member> {
+    static create(data: MemberSchemaType): Promise<IMember> {
         const memberId = crypto.randomUUID();
         return prisma.member.create({
             data: {
@@ -32,7 +60,7 @@ export class MembersModel {
         });
     }
 
-    static async update(data: MemberPartialSchemaType, id: UUID): Promise<Member | null> {
+    static async update(data: MemberPartialSchemaType, id: UUID): Promise<IMember | null> {
         const member = await prisma.member.findUnique({
             where: { memberId: id }
         });
@@ -45,7 +73,7 @@ export class MembersModel {
         });
     }
 
-    static async delete(id: UUID): Promise<Member | null> {
+    static async delete(id: UUID): Promise<IMember | null> {
         const member = await prisma.member.findUnique({
             where: { memberId: id }
         });

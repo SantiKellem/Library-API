@@ -1,4 +1,4 @@
-export interface Sanction {
+export interface ISanction {
     sanctionId: number,
     sanctionDate: Date,
     sanctionDays: number

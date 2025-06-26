@@ -1,6 +1,6 @@
-import { Book } from "./books.js";
+import { Book } from "./interfaces/books.js";
 
-export interface Copy {
+export interface ICopy {
     copyId: number,
     book: Book
 }
