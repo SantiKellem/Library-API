@@ -1,12 +1,12 @@
 import { Request, Response } from 'express';
 import { MembersModel } from '../models/MembersModel.js';
 import { isValidUuid } from '../utils/isValidUuid.js';
-import { DateTime } from 'luxon';
 import { Loan } from '../domain/entities/Loan.js';
 import { CopiesModel } from '../models/CopiesModel.js';
 import { Member } from '../domain/entities/Member.js';
 import { LoanPolicyModel } from '../models/LoanPolicyModel.js';
 import { BooksModel } from '../models/BooksModel.js';
+import { LoanModel } from '../models/LoanModel.js';
 
 export class MakeLoanController {
     private _loan?: Loan;
@@ -35,7 +35,7 @@ export class MakeLoanController {
             return res.status(400).json({ message: "Member is 'Disabled' or 'Sanctioned'"});
         } else {
             this.member = member;
-            this.loan = Loan.createNewLoan(DateTime.now().setZone("America/Argentina/Buenos_Aires").toJSDate());
+            this.loan = Loan.createNewLoan();
             return res.json({ lastName: member.lastName, firstName: member.firstName });
         }
     }
@@ -63,7 +63,7 @@ export class MakeLoanController {
 
             const bookIsPending = await this.member.isBookPending(book);
             if (bookIsPending) 
-                throw new Error("Member has this ");
+                throw new Error("Member has a copy of this book that has not been returned yet");
             
             if (this.loan.isCopyIncluded(copy)) 
                 throw new Error("Copy is already included in the current loan");
@@ -76,5 +76,18 @@ export class MakeLoanController {
         }
     }
 
-    // public async confirmLoan(req: Request, res: Response) {}
+    public async confirmLoan(req: Request, res: Response) {
+        try {
+            this.loan;
+            if (this.loan.getCopies().length === 0) 
+                throw new Error("No copies selected for the loan");
+
+            this.loan.setDueDates();
+
+            const newLoan = await LoanModel.create(this.loan, this.member.memberId);
+            return res.json({ message: "Loan created successfully", loan: newLoan });
+        } catch (err: any) {
+            return res.status(400).json({ error: err.message });
+        }
+    }
 }

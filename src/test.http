@@ -43,7 +43,7 @@ POST http://localhost:3000/copies
 Content-Type: application/json
 
 {
-  "bookId": 6
+  "bookId": 1
 }
 
 ###
@@ -143,26 +143,26 @@ DELETE http://localhost:3000/sanctions/5
 GET http://localhost:3000/members
 
 ###
-GET http://localhost:3000/members/a5ff1c98-dff5-459f-9a5d-0ae66aa681ba
+GET http://localhost:3000/members/1b5bbc58-400f-4177-878e-866870a93bbd
 
 ###
 POST http://localhost:3000/members
 Content-Type: application/json
 
 {
-  "firstName": "Shakir",
-  "lastName": "Chaya",
-  "email": "shakirchaya@gmail.com",
+  "firstName": "Franco",
+  "lastName": "Sussi",
+  "email": "francosussi@gmail.com",
   "address": "Italia 3214",
   "phone": "+54 341 0205877"
 }
 
 ###
-PATCH http://localhost:3000/members/a5ff1c98-dff5-459f-9a5d-0ae66aa681ba
+PATCH http://localhost:3000/members/1b5bbc58-400f-4177-878e-866870a93bbd
 Content-Type: application/json
 
 {
-  "email": "shakirboca@gmail.com"
+  "memberStatus": "Enabled"
 }
 
 ###
@@ -172,7 +172,16 @@ DELETE http://localhost:3000/members/2ccab851-460b-4ee9-aa57-4bd90ce80db0
 
 ### MAKE LOAN USE CASE
 ###
-GET http://localhost:3000/makeLoan/searchMember/1b5bbc58-400f-4177-878e-866870a93bbd
+GET http://localhost:3000/makeLoan/searchMember/7902bb61-6136-45b2-b480-c78f05618713
 
 ###
-POST http://localhost:3000/makeLoan/selectCopy/1
+POST http://localhost:3000/makeLoan/selectCopy/9
+
+
+###
+POST http://localhost:3000/makeLoan/confirmLoan
+
+
+
+### RETURN COPY USE CASE
+###

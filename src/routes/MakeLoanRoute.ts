@@ -8,7 +8,7 @@ MakeLoanRouter.get('/searchMember/:id', (req, res) => { mlc.searchMember(req, re
 
 MakeLoanRouter.post('/selectCopy/:id', (req, res) => { mlc.selectCopy(req, res) });
 
-// MakeLoanRouter.post('confirmLoan', (req, res) => { mlc.confirmLoan(req, res) });
+MakeLoanRouter.post('/confirmLoan', (req, res) => { mlc.confirmLoan(req, res) });
 
 
 export { MakeLoanRouter };
